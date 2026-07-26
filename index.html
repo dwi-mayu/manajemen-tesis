@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Tesis</title>
+    <title>Dashboard Manajemen Tesis</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --bg-color: #f8f9fa;
+            --primary: #2563eb;
+            --secondary: #1d4ed8;
+            --bg-color: #f8fafc;
             --sidebar-bg: #ffffff;
-            --text-dark: #2b2d42;
-            --text-muted: #8d99ae;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
             --card-bg: #ffffff;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --transition: all 0.3s ease;
@@ -46,7 +46,7 @@
         .sidebar-header {
             padding: 24px;
             text-align: center;
-            border-bottom: 1px solid #edf2f4;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .sidebar-header h2 {
@@ -115,7 +115,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
+            font-size: 1.1rem;
         }
 
         /* Tabs/Pages */
@@ -170,6 +170,7 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 16px;
+            line-height: 1.5;
         }
 
         .btn {
@@ -187,32 +188,6 @@
 
         .btn:hover {
             background-color: var(--secondary);
-        }
-
-        /* Progress Bar */
-        .progress-section {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 12px;
-            background-color: #e2e8f0;
-            border-radius: 10px;
-            margin-top: 12px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--primary);
-            width: 45%; /* Ubah persentase ini sesuai progres nyata */
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
         }
 
         /* Mobile Menu Toggle */
@@ -248,10 +223,10 @@
         </div>
         <ul class="nav-links">
             <li><a href="#" onclick="switchTab('dashboard', this)" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-            <li><a href="#" onclick="switchTab('draft', this)"><i class="fas fa-file-alt"></i> Draft Bab</a></li>
-            <li><a href="#" onclick="switchTab('referensi', this)"><i class="fas fa-book"></i> Referensi & Jurnal</a></li>
-            <li><a href="#" onclick="switchTab('data', this)"><i class="fas fa-chart-bar"></i> Data BPS & Analisis</a></li>
-            <li><a href="#" onclick="switchTab('logbook', this)"><i class="fas fa-tasks"></i> Log Bimbingan</a></li>
+            <li><a href="#" onclick="switchTab('draft', this)"><i class="fas fa-folder-open"></i> Draft Folder</a></li>
+            <li><a href="#" onclick="switchTab('referensi', this)"><i class="fas fa-book"></i> Referensi Literatur</a></li>
+            <li><a href="#" onclick="switchTab('data', this)"><i class="fas fa-chart-pie"></i> Data & Analisis</a></li>
+            <li><a href="#" onclick="switchTab('logbook', this)"><i class="fas fa-clipboard-list"></i> Log Bimbingan</a></li>
         </ul>
     </nav>
 
@@ -261,98 +236,126 @@
             <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
             <h1 id="page-title">Dashboard Utama</h1>
             <div class="user-profile">
-                <div class="avatar">DM</div>
-                <span style="font-weight: 500;">Dwi Mayu</span>
+                <div class="avatar"><i class="fas fa-user"></i></div>
+                <span style="font-weight: 500;">Profil Peneliti</span>
             </div>
         </header>
 
         <!-- Dashboard Tab -->
         <section id="dashboard" class="page-content active">
-            <div class="progress-section">
-                <h3><i class="fas fa-spinner fa-spin" style="color: var(--primary);"></i> Progres Penyusunan Tesis</h3>
-                <div class="progress-bar-container">
-                    <div class="progress-fill"></div>
-                </div>
-                <p style="margin-top: 10px; color: var(--text-muted);">Estimasi selesai: 45% (Sedang menyusun Bab 3 & Pengolahan Data)</p>
-            </div>
-
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Selamat datang di pusat manajemen penyusunan tesis Anda.</p>
+            
             <div class="grid-cards">
                 <div class="card">
-                    <i class="fas fa-folder-open card-icon"></i>
+                    <i class="fas fa-hdd card-icon"></i>
                     <h3>Folder Utama Drive</h3>
-                    <p>Akses langsung ke seluruh direktori penyimpanan tesis di Google Drive.</p>
-                    <a href="https://drive.google.com" target="_blank" class="btn">Buka Drive</a>
+                    <p>Akses langsung ke seluruh direktori penyimpanan root tesis Anda di Google Drive.</p>
+                    <!-- Ini adalah tautan folder Drive Utama yang Anda berikan -->
+                    <a href="https://drive.google.com/drive/u/1/folders/13gnhXDttUUw9ss_FoezgepZQSByKV_bt" target="_blank" class="btn">Buka Folder Utama</a>
                 </div>
                 <div class="card">
-                    <i class="fas fa-calendar-check card-icon"></i>
+                    <i class="fas fa-calendar-alt card-icon"></i>
                     <h3>Timeline & Target</h3>
-                    <p>Pantau tenggat waktu harian dan mingguan via Spreadsheet.</p>
-                    <a href="#" class="btn">Buka Timeline</a>
+                    <p>Pantau tenggat waktu harian dan target mingguan pengerjaan tesis Anda.</p>
+                    <!-- Ganti "#" dengan link Google Sheets timeline Anda -->
+                    <a href="#" target="_blank" class="btn">Buka Timeline</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-file-signature card-icon"></i>
+                    <h3>Administrasi</h3>
+                    <p>Folder khusus untuk SK Pembimbing, form persetujuan, dan surat izin riset.</p>
+                    <!-- Ganti "#" dengan link folder administrasi Anda -->
+                    <a href="#" target="_blank" class="btn">Buka Folder Admin</a>
                 </div>
             </div>
         </section>
 
         <!-- Draft Tab -->
         <section id="draft" class="page-content">
-            <h2>Draft Dokumen</h2>
-            <p style="color: var(--text-muted); margin-bottom: 24px;">Ganti tautan pada tombol dengan tautan file Google Docs Anda.</p>
+            <h2>Folder Draft Dokumen</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Akses folder Google Drive yang berisi dokumen penulisan setiap bab.</p>
             <div class="grid-cards">
                 <div class="card">
-                    <i class="fas fa-file-word card-icon"></i>
-                    <h3>Bab 1: Pendahuluan</h3>
-                    <p>Latar belakang, rumusan masalah, dan tujuan penelitian.</p>
-                    <a href="#" class="btn">Edit Dokumen</a>
+                    <i class="fas fa-folder card-icon"></i>
+                    <h3>Folder Bab 1 - 3</h3>
+                    <p>Folder penyimpanan dokumen Pendahuluan, Tinjauan Pustaka, dan Metodologi.</p>
+                    <a href="#" target="_blank" class="btn">Buka Folder</a>
                 </div>
                 <div class="card">
-                    <i class="fas fa-file-word card-icon"></i>
-                    <h3>Bab 2: Tinjauan Pustaka</h3>
-                    <p>Landasan teori dan kerangka konseptual.</p>
-                    <a href="#" class="btn">Edit Dokumen</a>
+                    <i class="fas fa-folder card-icon"></i>
+                    <h3>Folder Bab 4 & 5</h3>
+                    <p>Folder penyimpanan dokumen Hasil, Pembahasan, dan Kesimpulan.</p>
+                    <a href="#" target="_blank" class="btn">Buka Folder</a>
                 </div>
                 <div class="card">
-                    <i class="fas fa-file-word card-icon"></i>
-                    <h3>Bab 3: Metodologi</h3>
-                    <p>Desain penelitian, populasi, sampel, dan teknik analisis.</p>
-                    <a href="#" class="btn">Edit Dokumen</a>
+                    <i class="fas fa-folder card-icon"></i>
+                    <h3>Folder Bagian Akhir</h3>
+                    <p>Folder untuk Abstrak, Daftar Pustaka, dan halaman pengesahan.</p>
+                    <a href="#" target="_blank" class="btn">Buka Folder</a>
                 </div>
             </div>
         </section>
 
         <!-- Data Tab -->
         <section id="data" class="page-content">
-            <h2>Data & Analisis</h2>
-            <p style="color: var(--text-muted); margin-bottom: 24px;">Manajemen dataset, skrip pemrosesan, dan visualisasi.</p>
+            <h2>Data & Analisis Penelitian</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Manajemen dataset, skrip pemrosesan, dan lampiran perhitungan.</p>
             <div class="grid-cards">
                 <div class="card">
                     <i class="fas fa-database card-icon"></i>
-                    <h3>Dataset Raw</h3>
-                    <p>Penyimpanan data mentah, termasuk koordinat spasial dan data statistik tabular.</p>
-                    <a href="#" class="btn">Lihat Data</a>
+                    <h3>Data Mentah (Raw Data)</h3>
+                    <p>Penyimpanan dataset asli sebelum dilakukan pemrosesan atau pembersihan.</p>
+                    <a href="#" target="_blank" class="btn">Akses Folder Data</a>
                 </div>
                 <div class="card">
-                    <i class="fas fa-code card-icon"></i>
-                    <h3>Skrip Pengolahan</h3>
-                    <p>Kumpulan kode Python / sintaks analisis untuk pemrosesan data otomatis.</p>
-                    <a href="#" class="btn">Buka Skrip</a>
+                    <i class="fas fa-calculator card-icon"></i>
+                    <h3>Analisis & Pengolahan</h3>
+                    <p>Akses ke skrip analisis, spreadsheet perhitungan, atau hasil olah data software.</p>
+                    <a href="#" target="_blank" class="btn">Buka Analisis</a>
                 </div>
                 <div class="card">
-                    <i class="fas fa-map-marked-alt card-icon"></i>
-                    <h3>Pemetaan Wilayah</h3>
-                    <p>Akses data spasial dan luaran peta geografis.</p>
-                    <a href="#" class="btn">Buka Web GIS</a>
+                    <i class="fas fa-paperclip card-icon"></i>
+                    <h3>Lampiran Riset</h3>
+                    <p>Penyimpanan hasil kuesioner, transkrip wawancara, dan dokumentasi lapangan.</p>
+                    <a href="#" target="_blank" class="btn">Buka Lampiran</a>
                 </div>
             </div>
         </section>
 
-        <!-- Referensi Tab & Logbook (Kosong untuk diisi) -->
+        <!-- Referensi Tab -->
         <section id="referensi" class="page-content">
-            <h2>Manajer Referensi</h2>
-            <p>Tautkan library Mendeley/Zotero atau folder PDF jurnal di sini.</p>
+            <h2>Referensi & Literatur</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Kumpulan jurnal, e-book, dan artikel acuan penelitian.</p>
+            <div class="grid-cards">
+                <div class="card">
+                    <i class="fas fa-book-open card-icon"></i>
+                    <h3>Folder Jurnal Utama</h3>
+                    <p>Akses ke folder Google Drive berisi PDF jurnal dan literatur rujukan tesis.</p>
+                    <a href="#" target="_blank" class="btn">Buka Referensi</a>
+                </div>
+            </div>
         </section>
 
+        <!-- Logbook Tab -->
         <section id="logbook" class="page-content">
-            <h2>Log Bimbingan</h2>
-            <p>Sisipkan Google Form untuk mencatat hasil revisi harian dari dosen.</p>
+            <h2>Log Bimbingan (Logbook)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Catatan riwayat revisi dan progres bimbingan dengan dosen.</p>
+            <div class="grid-cards">
+                <div class="card">
+                    <i class="fas fa-edit card-icon"></i>
+                    <h3>Input Catatan Bimbingan</h3>
+                    <p>Isi form setiap kali selesai melakukan bimbingan untuk mencatat revisi.</p>
+                    <!-- Ganti "#" dengan link Google Form Anda -->
+                    <a href="#" target="_blank" class="btn">Isi Form</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-list-alt card-icon"></i>
+                    <h3>Riwayat Revisi</h3>
+                    <p>Lihat rekapitulasi masukan dosen dari bimbingan-bimbingan sebelumnya.</p>
+                    <!-- Ganti "#" dengan link respon Google Form (Spreadsheet) -->
+                    <a href="#" target="_blank" class="btn">Lihat Riwayat</a>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -360,24 +363,18 @@
     <script>
         // Fungsi untuk berpindah antar halaman (Tab)
         function switchTab(tabId, element) {
-            // Sembunyikan semua konten
             document.querySelectorAll('.page-content').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Hapus class active dari semua menu
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.remove('active');
             });
 
-            // Tampilkan halaman yang dipilih
             document.getElementById(tabId).classList.add('active');
             element.classList.add('active');
-
-            // Ubah judul header
             document.getElementById('page-title').innerText = element.innerText;
 
-            // Tutup sidebar di versi mobile setelah klik
             if(window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.remove('show');
             }
