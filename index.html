@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Manajemen Tesis — Relung Adiniah P.</title>
+<title>Manajemen Tesis — Relung Adiniah P.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B2838'/%3E%3Cpath d='M8 8h9a3 3 0 0 1 3 3v13a2.6 2.6 0 0 0-2.6-2.6H8V8Z' fill='%23C9A968'/%3E%3Cpath d='M24 8h-9a3 3 0 0 0-3 3v13a2.6 2.6 0 0 1 2.6-2.6H24V8Z' fill='%23A8823C'/%3E%3C/svg%3E">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,11 +23,10 @@
     --text-muted:#697382;
     --rule:#E4DFD2;
     --shadow-card: 0 1px 2px rgba(27,40,56,0.06), 0 6px 20px -8px rgba(27,40,56,0.18);
-    --shadow-lift: 0 12px 28px -10px rgba(27,40,56,0.28);
+    --shadow-lift: 0 14px 32px -10px rgba(27,40,56,0.3);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
-
   html{ scroll-behavior:smooth; }
 
   body{
@@ -35,6 +35,18 @@
     font-family:'Inter', sans-serif;
     display:flex;
     min-height:100vh;
+    position:relative;
+  }
+
+  /* faint paper grain, purely atmospheric */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1;
+    opacity:0.5;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.1  0 0 0 0 0.08  0 0 0 0 0.05  0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -43,10 +55,9 @@
 
   /* ===== Sidebar: book spine ===== */
   .sidebar{
-    width:272px;
+    width:280px;
     flex-shrink:0;
-    background:
-      linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
+    background: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
     color:#EDE7D8;
     display:flex;
     flex-direction:column;
@@ -56,7 +67,6 @@
   }
 
   .sidebar::after{
-    /* spine hinge line, like a book's gutter */
     content:"";
     position:absolute;
     top:0; right:10px; bottom:0;
@@ -65,13 +75,13 @@
   }
 
   .sidebar-header{
-    padding:36px 28px 24px;
+    padding:34px 28px 22px;
     border-bottom:1px solid rgba(237,231,216,0.12);
   }
 
   .sidebar-header .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.68rem;
+    font-size:0.66rem;
     letter-spacing:0.16em;
     text-transform:uppercase;
     color:var(--gold-soft);
@@ -82,35 +92,46 @@
   .sidebar-header h2{
     font-family:'Source Serif 4', serif;
     font-weight:600;
-    font-size:1.5rem;
-    line-height:1.25;
+    font-size:1.42rem;
+    line-height:1.3;
     color:#F6F2E7;
   }
 
-  .nav-links{
-    list-style:none;
-    padding:22px 14px;
-    flex-grow:1;
+  .sidebar-header h2 i{ color:var(--gold-soft); margin-right:8px; }
+
+  .nav-scroll{ flex-grow:1; overflow-y:auto; padding:18px 14px 10px; }
+
+  .nav-group{ margin-bottom:6px; }
+  .nav-group + .nav-group{ margin-top:18px; }
+
+  .nav-group-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#8B93A0;
+    padding:0 14px 8px;
   }
 
-  .nav-links li{ margin-bottom:4px; position:relative; }
+  .nav-links{ list-style:none; }
+  .nav-links li{ margin-bottom:3px; position:relative; }
 
   .nav-links a{
     text-decoration:none;
     color:#C8CDD6;
     font-weight:500;
-    font-size:0.94rem;
+    font-size:0.92rem;
     display:flex;
     align-items:center;
     gap:13px;
-    padding:12px 14px;
+    padding:11px 14px;
     border-radius:6px;
     transition:background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
     position:relative;
     z-index:1;
   }
 
-  .nav-links a i{ width:18px; text-align:center; color:var(--gold-soft); font-size:0.95rem; }
+  .nav-links a i{ width:18px; text-align:center; color:var(--gold-soft); font-size:0.92rem; }
 
   .nav-links a:hover{
     background:rgba(237,231,216,0.06);
@@ -123,25 +144,27 @@
     color:#F6F2E7;
   }
 
-  /* ribbon bookmark that slides to the active chapter */
   .nav-links a.active::before{
     content:"";
     position:absolute;
     left:-14px; top:50%;
     transform:translateY(-50%);
-    width:5px; height:34px;
+    width:5px; height:32px;
     background: linear-gradient(180deg, var(--maroon), var(--maroon-deep));
     border-radius:0 3px 3px 0;
     box-shadow: 2px 0 6px rgba(122,46,59,0.5);
   }
 
   .sidebar-footer{
-    padding:20px 28px 26px;
+    padding:16px 28px 24px;
     border-top:1px solid rgba(237,231,216,0.12);
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.68rem;
-    letter-spacing:0.08em;
+    font-size:0.66rem;
+    letter-spacing:0.06em;
     color:#8B93A0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
   }
 
   /* ===== Main content ===== */
@@ -150,8 +173,10 @@
     padding:40px 48px 64px;
     height:100vh;
     overflow-y:auto;
+    position:relative;
+    z-index:2;
     background:
-      radial-gradient(1200px 400px at 90% -10%, rgba(168,130,60,0.05), transparent 60%),
+      radial-gradient(1200px 400px at 90% -10%, rgba(168,130,60,0.06), transparent 60%),
       var(--paper);
   }
 
@@ -203,6 +228,7 @@
     font-family:'Source Serif 4', serif;
     font-weight:600;
     font-size:1rem;
+    flex-shrink:0;
   }
 
   .user-profile span{ font-weight:600; font-size:0.92rem; color:var(--text-dark); }
@@ -225,53 +251,129 @@
     line-height:1.6;
   }
 
-  /* Signature element: the institutional seal, used once on the dashboard */
-  .seal-block{
+  /* ===== Hero (Beranda) ===== */
+  .hero{
     display:flex;
-    align-items:center;
-    gap:20px;
-    margin:26px 0 6px;
-    padding:20px 24px;
-    background:var(--ink);
-    border-radius:12px;
-    color:#EDE7D8;
-    box-shadow:var(--shadow-lift);
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:32px;
+    flex-wrap:wrap;
+    margin:24px 0 6px;
   }
-
-  .seal{
-    width:64px; height:64px;
-    border-radius:50%;
-    border:2px solid var(--gold-soft);
+  .hero-copy{ max-width:560px; }
+  .hero-copy .page-intro{ margin:12px 0 0; }
+  .hero-cta{
     display:flex;
-    align-items:center;
-    justify-content:center;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
     flex-shrink:0;
-    position:relative;
   }
-  .seal::before{
-    content:"";
-    position:absolute;
-    inset:6px;
-    border:1px dashed rgba(201,169,104,0.55);
-    border-radius:50%;
-  }
-  .seal i{ color:var(--gold-soft); font-size:1.3rem; }
-
-  .seal-block .seal-text .eyebrow{
+  .hero-cta .btn{ background:var(--maroon); }
+  .hero-cta .btn:hover{ background:var(--maroon-deep); }
+  .hero-cta small{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--gold-soft);
-    display:block;
-    margin-bottom:4px;
+    color:var(--text-muted);
+    letter-spacing:0.03em;
   }
-  .seal-block .seal-text p{
+
+  /* ===== Daftar Isi (table of contents — signature nav for Beranda) ===== */
+  .toc-section{ margin-top:34px; }
+  .toc-heading{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:6px;
+  }
+  .toc-heading h2{
     font-family:'Source Serif 4', serif;
-    font-size:1.05rem;
-    color:#F6F2E7;
-    line-height:1.5;
+    font-weight:600;
+    font-size:1.4rem;
+    color:var(--ink);
   }
+  .toc-heading span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--text-muted);
+    letter-spacing:0.04em;
+  }
+
+  .toc{ margin-top:14px; border-top:1px solid var(--rule); }
+
+  .toc-row{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    padding:19px 6px;
+    border-bottom:1px solid var(--rule);
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+    background:none;
+    border-left:none; border-right:none; border-top:none;
+    width:100%;
+    text-align:left;
+    font:inherit;
+    transition:padding-left 0.2s ease;
+  }
+
+  .toc-row:hover{ padding-left:12px; }
+
+  .toc-num{
+    font-family:'Source Serif 4', serif;
+    font-size:1.3rem;
+    font-weight:600;
+    color:var(--gold);
+    width:30px;
+    flex-shrink:0;
+    transition:color 0.2s ease;
+  }
+
+  .toc-title{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    flex-shrink:0;
+    max-width:270px;
+  }
+  .toc-title b{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:1.14rem;
+    color:var(--ink);
+    transition:color 0.2s ease;
+  }
+  .toc-title small{
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    color:var(--text-muted);
+    line-height:1.4;
+  }
+
+  .toc-leader{
+    flex:1;
+    align-self:center;
+    border-bottom:2px dotted var(--rule);
+    margin:0 4px;
+    min-width:24px;
+  }
+
+  .toc-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--text-muted);
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0;
+  }
+  .toc-meta i{ color:var(--gold-soft); transition:transform 0.2s ease; }
+
+  .toc-row:hover .toc-num,
+  .toc-row:hover .toc-title b{ color:var(--maroon); }
+  .toc-row:hover .toc-meta i{ transform:translateX(3px); }
 
   /* ===== Cards ===== */
   .grid-cards{
@@ -280,6 +382,8 @@
     gap:20px;
     margin-top:26px;
   }
+
+  .grid-cards.single{ grid-template-columns:minmax(270px, 420px); }
 
   .card{
     background:#fff;
@@ -292,6 +396,18 @@
     position:relative;
     display:flex;
     flex-direction:column;
+    opacity:0;
+    animation:cardIn 0.5s ease forwards;
+  }
+
+  .grid-cards .card:nth-child(1){ animation-delay:0.03s; }
+  .grid-cards .card:nth-child(2){ animation-delay:0.09s; }
+  .grid-cards .card:nth-child(3){ animation-delay:0.15s; }
+  .grid-cards .card:nth-child(4){ animation-delay:0.21s; }
+
+  @keyframes cardIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
   }
 
   .card:hover{
@@ -351,21 +467,33 @@
     border-radius:6px;
     font-weight:600;
     font-size:0.88rem;
-    transition:background 0.2s ease, transform 0.15s ease;
+    transition:background 0.2s ease, transform 0.15s ease, gap 0.2s ease;
     border:none;
     cursor:pointer;
     align-self:flex-start;
   }
 
-  .btn:hover{ background:var(--maroon-deep); }
+  .btn:hover{ background:var(--maroon-deep); gap:11px; }
   .btn:active{ transform:scale(0.98); }
 
-  .btn:focus-visible, .nav-links a:focus-visible, .menu-toggle:focus-visible{
+  .btn:focus-visible, .nav-links a:focus-visible, .menu-toggle:focus-visible, .toc-row:focus-visible{
     outline:2px solid var(--gold);
     outline-offset:2px;
   }
 
   .btn i{ font-size:0.8rem; }
+
+  /* ===== Section divider label (used inside multi-group pages) ===== */
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    margin:34px 0 -4px;
+    display:block;
+  }
+  .grid-cards + .section-label{ margin-top:38px; }
 
   /* ===== Mobile ===== */
   .menu-toggle{
@@ -380,7 +508,7 @@
   @media (max-width: 860px){
     .sidebar{
       position:fixed;
-      left:-272px;
+      left:-280px;
       height:100vh;
       top:0;
       transition:left 0.3s ease;
@@ -391,6 +519,9 @@
     .top-header{ align-items:center; }
     #page-title{ font-size:1.5rem; }
     .user-profile span{ display:none; }
+    .hero{ align-items:flex-start; }
+    .toc-title{ max-width:170px; }
+    .toc-meta span{ display:none; }
   }
 
   .overlay{
@@ -410,16 +541,44 @@
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <span class="eyebrow">Manajemen Tesis</span>
-      <h2><i class="fas fa-graduation-cap" style="color:var(--gold-soft); margin-right:8px;"></i>Tesis Aiq</h2>
+      <h2><i class="fas fa-book-bookmark"></i>Tesis Aiq</h2>
     </div>
-    <ul class="nav-links">
-      <li><a href="#" onclick="switchTab('dashboard', this)" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-      <li><a href="#" onclick="switchTab('draft', this)"><i class="fas fa-folder-open"></i> Draft Folder</a></li>
-      <li><a href="#" onclick="switchTab('referensi', this)"><i class="fas fa-book"></i> Referensi Literatur</a></li>
-      <li><a href="#" onclick="switchTab('data', this)"><i class="fas fa-chart-pie"></i> Data & Analisis</a></li>
-      <li><a href="#" onclick="switchTab('logbook', this)"><i class="fas fa-clipboard-list"></i> Log Bimbingan</a></li>
-    </ul>
-    <div class="sidebar-footer">TESIS · 2026</div>
+
+    <div class="nav-scroll">
+      <div class="nav-group">
+        <ul class="nav-links">
+          <li><a href="#" onclick="switchTab('dashboard', this)" class="active"><i class="fas fa-house"></i> Beranda</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <p class="nav-group-label">Berkas Administrasi</p>
+        <ul class="nav-links">
+          <li><a href="#" onclick="switchTab('administrasi', this)"><i class="fas fa-file-signature"></i> Administrasi</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <p class="nav-group-label">Penyusunan Naskah</p>
+        <ul class="nav-links">
+          <li><a href="#" onclick="switchTab('draft', this)"><i class="fas fa-folder-open"></i> Draft Naskah</a></li>
+          <li><a href="#" onclick="switchTab('data', this)"><i class="fas fa-chart-pie"></i> Data & Analisis</a></li>
+          <li><a href="#" onclick="switchTab('referensi', this)"><i class="fas fa-book"></i> Referensi Literatur</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <p class="nav-group-label">Bimbingan & Revisi</p>
+        <ul class="nav-links">
+          <li><a href="#" onclick="switchTab('logbook', this)"><i class="fas fa-clipboard-list"></i> Log Bimbingan</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <span>TESIS · 2026</span>
+      <span id="updated-date"></span>
+    </div>
   </nav>
 
   <!-- Main Content -->
@@ -428,8 +587,8 @@
       <div class="top-header-left" style="display:flex; align-items:center; gap:16px;">
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu"><i class="fas fa-bars"></i></button>
         <div>
-          <span class="eyebrow">Pusat Kendali</span>
-          <h1 id="page-title">Dashboard Utama</h1>
+          <span class="eyebrow" id="page-eyebrow" style="display:none"></span>
+          <h1 id="page-title">Beranda</h1>
         </div>
       </div>
       <div class="user-profile">
@@ -441,26 +600,70 @@
       </div>
     </header>
 
-    <!-- Dashboard Tab -->
+    <!-- Dashboard / Beranda -->
     <section id="dashboard" class="page-content active">
-      <p class="page-intro">Selamat datang di pusat manajemen penyusunan tesis Anda. Semua folder, jadwal, dan berkas administrasi terkumpul di satu tempat.</p>
-
-      <div class="seal-block">
-        <div class="seal"><i class="fas fa-stamp"></i></div>
-        <div class="seal-text">
-          <span class="eyebrow">Status Naskah</span>
-          <p>Satu pintu akses untuk seluruh dokumen, sejak draf pertama hingga siap sidang.</p>
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="page-intro">Pusat kendali penyusunan tesis Anda — satu pintu akses menuju seluruh folder, jadwal, dan berkas administrasi. Gunakan daftar isi di bawah untuk berpindah ke setiap bagian kerja.</p>
+        </div>
+        <div class="hero-cta">
+          <a href="https://drive.google.com/drive/u/1/folders/13gnhXDttUUw9ss_FoezgepZQSByKV_bt" target="_blank" rel="noopener" class="btn">Buka Folder Utama Drive <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <small>Direktori root — memuat seluruh subfolder di bawah ini</small>
         </div>
       </div>
 
+      <div class="toc-section">
+        <div class="toc-heading">
+          <h2>Daftar Isi</h2>
+          <span>5 BAGIAN</span>
+        </div>
+
+        <div class="toc">
+          <a href="#" class="toc-row" onclick="switchTab('administrasi', getNavLink('administrasi')); return false;">
+            <span class="toc-num">I</span>
+            <span class="toc-title"><b>Administrasi</b><small>SK pembimbing, perizinan, timeline & target</small></span>
+            <span class="toc-leader"></span>
+            <span class="toc-meta"><span>2 tautan</span><i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="#" class="toc-row" onclick="switchTab('draft', getNavLink('draft')); return false;">
+            <span class="toc-num">II</span>
+            <span class="toc-title"><b>Draft Naskah</b><small>Bab 1–3, Bab 4–5, bagian akhir, bahan tayang</small></span>
+            <span class="toc-leader"></span>
+            <span class="toc-meta"><span>4 tautan</span><i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="#" class="toc-row" onclick="switchTab('data', getNavLink('data')); return false;">
+            <span class="toc-num">III</span>
+            <span class="toc-title"><b>Data & Analisis</b><small>Data mentah, olah data, lampiran riset</small></span>
+            <span class="toc-leader"></span>
+            <span class="toc-meta"><span>3 tautan</span><i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="#" class="toc-row" onclick="switchTab('referensi', getNavLink('referensi')); return false;">
+            <span class="toc-num">IV</span>
+            <span class="toc-title"><b>Referensi Literatur</b><small>Jurnal dan pustaka acuan penelitian</small></span>
+            <span class="toc-leader"></span>
+            <span class="toc-meta"><span>1 tautan</span><i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="#" class="toc-row" onclick="switchTab('logbook', getNavLink('logbook')); return false;">
+            <span class="toc-num">V</span>
+            <span class="toc-title"><b>Log Bimbingan</b><small>Catatan revisi dan riwayat bimbingan dosen</small></span>
+            <span class="toc-leader"></span>
+            <span class="toc-meta"><span>2 tautan</span><i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Administrasi -->
+    <section id="administrasi" class="page-content">
+      <p class="page-intro">Berkas administratif dan jadwal kerja — SK pembimbing, formulir persetujuan, surat izin riset, serta pemantauan tenggat waktu.</p>
       <div class="grid-cards">
         <div class="card">
           <div class="card-top">
-            <div class="card-icon"><i class="fas fa-hdd"></i></div>
+            <div class="card-icon"><i class="fas fa-file-signature"></i></div>
           </div>
-          <h3>Folder Utama Drive</h3>
-          <p>Akses langsung ke seluruh direktori penyimpanan root tesis Anda di Google Drive.</p>
-          <a href="https://drive.google.com/drive/u/1/folders/13gnhXDttUUw9ss_FoezgepZQSByKV_bt" target="_blank" rel="noopener" class="btn">Buka Folder Utama <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <h3>SK Pembimbing & Perizinan</h3>
+          <p>Folder khusus untuk SK Pembimbing, form persetujuan, dan surat izin riset.</p>
+          <a href="https://drive.google.com/drive/folders/17U2EbC6cV_aH0UA_lvae7fbNWYLck3Zf?usp=sharing" target="_blank" rel="noopener" class="btn">Buka Folder Admin <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
         <div class="card">
           <div class="card-top">
@@ -470,18 +673,10 @@
           <p>Pantau tenggat waktu harian dan target mingguan pengerjaan tesis Anda.</p>
           <a href="https://docs.google.com/spreadsheets/d/1UjL57L8c_l7uIW2Mwiaar8andWkcejXHvvSxC3z4ABc/edit?usp=sharing" target="_blank" rel="noopener" class="btn">Buka Timeline <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
-        <div class="card">
-          <div class="card-top">
-            <div class="card-icon"><i class="fas fa-file-signature"></i></div>
-          </div>
-          <h3>Administrasi</h3>
-          <p>Folder khusus untuk SK Pembimbing, form persetujuan, dan surat izin riset.</p>
-          <a href="https://drive.google.com/drive/folders/17U2EbC6cV_aH0UA_lvae7fbNWYLck3Zf?usp=sharing" target="_blank" rel="noopener" class="btn">Buka Folder Admin <i class="fas fa-arrow-up-right-from-square"></i></a>
-        </div>
       </div>
     </section>
 
-    <!-- Draft Tab -->
+    <!-- Draft Naskah -->
     <section id="draft" class="page-content">
       <p class="page-intro">Akses folder Google Drive yang berisi dokumen penulisan setiap bab, disusun sesuai urutan naskah.</p>
       <div class="grid-cards">
@@ -523,7 +718,7 @@
       </div>
     </section>
 
-    <!-- Data Tab -->
+    <!-- Data & Analisis -->
     <section id="data" class="page-content">
       <p class="page-intro">Manajemen dataset, skrip pemrosesan, dan lampiran perhitungan penelitian.</p>
       <div class="grid-cards">
@@ -554,10 +749,10 @@
       </div>
     </section>
 
-    <!-- Referensi Tab -->
+    <!-- Referensi Literatur -->
     <section id="referensi" class="page-content">
       <p class="page-intro">Kumpulan jurnal, e-book, dan artikel acuan penelitian.</p>
-      <div class="grid-cards">
+      <div class="grid-cards single">
         <div class="card">
           <div class="card-top">
             <div class="card-icon"><i class="fas fa-book-open"></i></div>
@@ -569,7 +764,7 @@
       </div>
     </section>
 
-    <!-- Logbook Tab -->
+    <!-- Log Bimbingan -->
     <section id="logbook" class="page-content">
       <p class="page-intro">Catatan riwayat revisi dan progres bimbingan dengan dosen.</p>
       <div class="grid-cards">
@@ -595,21 +790,32 @@
   </main>
 
   <script>
-    const pageTitles = {
-      dashboard: 'Dashboard Utama',
-      draft: 'Draft Folder',
-      referensi: 'Referensi Literatur',
-      data: 'Data & Analisis',
-      logbook: 'Log Bimbingan'
+    const pageInfo = {
+      dashboard:      { title: 'Beranda',              eyebrow: '' },
+      administrasi:   { title: 'Administrasi',          eyebrow: 'Berkas Administrasi' },
+      draft:          { title: 'Draft Naskah',          eyebrow: 'Penyusunan Naskah' },
+      data:           { title: 'Data & Analisis',       eyebrow: 'Penyusunan Naskah' },
+      referensi:      { title: 'Referensi Literatur',   eyebrow: 'Penyusunan Naskah' },
+      logbook:        { title: 'Log Bimbingan',         eyebrow: 'Bimbingan & Revisi' }
     };
+
+    function getNavLink(tabId){
+      return document.querySelector('.nav-links a[onclick*="\'' + tabId + '\'"]');
+    }
 
     function switchTab(tabId, element) {
       document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
       document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
 
       document.getElementById(tabId).classList.add('active');
-      element.classList.add('active');
-      document.getElementById('page-title').innerText = pageTitles[tabId];
+      if (element) element.classList.add('active');
+
+      document.getElementById('page-title').innerText = pageInfo[tabId].title;
+      const eyebrowEl = document.getElementById('page-eyebrow');
+      eyebrowEl.innerText = pageInfo[tabId].eyebrow;
+      eyebrowEl.style.display = pageInfo[tabId].eyebrow ? 'block' : 'none';
+
+      document.querySelector('.main-content').scrollTo({ top: 0, behavior: 'instant' });
 
       if (window.innerWidth <= 860) {
         document.getElementById('sidebar').classList.remove('show');
@@ -621,6 +827,9 @@
       document.getElementById('sidebar').classList.toggle('show');
       document.getElementById('overlay').classList.toggle('show');
     }
+
+    document.getElementById('updated-date').innerText =
+      new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
   </script>
 </body>
 </html>
